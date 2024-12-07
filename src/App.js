@@ -6,10 +6,8 @@ import Categories from './components/Categories/Categories';
 import MovieList from './components/MovieList/MovieList';
 // import MovieCard from './components/MovieCard/MovieCard';
 import Player from './components/Player/Player';
-import app from './firebaseConfig';
 
 function App() {
-  console.log('firebase initialized', app);
   return (
     <Router>
       <div className="App">
