@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import './MovieList.css';
 
-const apiKey = '87711ded14430a9121ffeab4f15c4923'; // Replace with your TMDb API key
+const apiKey = '87711ded14430a9121ffeab4f15c4923'; 
 
 const categoryToGenreId = {
   horror: 27,
@@ -21,7 +21,7 @@ const categoryToGenreId = {
 
 function MovieList() {
   const { category } = useParams();
-  const navigate = useNavigate(); // For navigation to Player
+  const navigate = useNavigate(); 
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import './Player.css'; // Import the CSS file
 
 function Player() {
   const { movieId } = useParams();
@@ -25,11 +26,10 @@ function Player() {
   }, [movieId]);
 
   return (
-    <div className="player">
+    <div className="player-container">
       {trailerKey ? (
         <iframe
-          width="560"
-          height="315"
+          className="video-player"
           src={`https://www.youtube.com/embed/${trailerKey}`}
           title="YouTube video player"
           frameBorder="0"
@@ -37,7 +37,7 @@ function Player() {
           allowFullScreen
         ></iframe>
       ) : (
-        <p>Trailer not available</p>
+        <p className="error-message">Trailer not available</p>
       )}
     </div>
   );

@@ -1,9 +1,11 @@
-/* Similar grid style as categories */
 .movie-list {
     padding: 2rem;
     text-align: center;
+    background-color: #180202;
   }
-  
+.movie-list h1{
+  color: aliceblue;
+} 
   .movie-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -11,10 +13,6 @@
     justify-content: center;
   }
   
-
-  /* MovieList.css */
-
-/* Container for movie cards */
 .movie-cards {
     display: flex;
     flex-wrap: wrap; /* Allow wrapping to the next line */
@@ -22,7 +20,6 @@
     gap: 20px; /* Space between cards */
   }
   
-  /* Individual movie card styling */
   .movie-card {
     width: calc(25% - 20px); /* 4 cards per row with space in between */
     cursor: pointer;
@@ -40,19 +37,18 @@
   }
   
   .movie-card:hover {
-    transform: scale(1.05); /* Add hover effect */
+    transform: scale(1.05);
   }
   
-  /* Make sure the cards stack vertically on smaller screens */
   @media (max-width: 768px) {
     .movie-card {
-      width: calc(50% - 20px); /* 2 cards per row */
+      width: calc(50% - 20px); 
     }
   }
   
   @media (max-width: 480px) {
     .movie-card {
-      width: 100%; /* 1 card per row */
+      width: 100%;
     }
   }
   

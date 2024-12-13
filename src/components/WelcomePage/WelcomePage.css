@@ -1,19 +1,23 @@
 .welcome-page {
     text-align: center;
     padding: 5rem;
-    background-color: #ffdddd;
+    background-color: #120103;
+    height: 100%;
   }
   
   .welcome-page h1 {
     font-size: 3rem;
     color: #ff0000;
   }
+  .welcome-page p{
+    color: #f9d3d3;
+  }
   
   .get-started {
     margin-top: 2rem;
     padding: 1rem 2rem;
-    background-color: #ff0000;
-    color: rgb(244, 238, 238);
+    background-color: #f9d3d3;
+    color: #B20710;
     border: none;
     font-weight: bolder;
     cursor: pointer;
