@@ -1,28 +1,294 @@
-.categories {
-    text-align: center;
-    padding: 2rem;
+/* ── Imports ─────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Page ────────────────────────────────────────────────────────── */
+.categories-page {
+  min-height: 100vh;
+  width: 100%;
+  background: #0a0608;
+  font-family: 'DM Sans', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  padding: 0 0 5rem;
+}
+
+/* ── Page background ─────────────────────────────────────────────── */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.page-bg-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(178,7,16,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 90% 80%, rgba(140,5,15,0.14) 0%, transparent 55%);
+}
+
+/* Subtle grid lines */
+.page-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 40%, transparent 100%);
+}
+
+/* ── Back button ─────────────────────────────────────────────────── */
+.back-btn {
+  position: relative;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 2rem 0 0 2.5rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.55);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.back-btn:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.05);
+}
+
+/* ── Header ──────────────────────────────────────────────────────── */
+.cats-header {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: 3rem 1rem 2.5rem;
+
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+}
+
+.is-ready .cats-header {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cats-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #e8192c;
+  margin-bottom: 0.9rem;
+}
+
+.cats-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.2rem, 8vw, 6rem);
+  letter-spacing: 0.05em;
+  color: #fff;
+  line-height: 0.95;
+  margin-bottom: 0.8rem;
+}
+
+.cats-title-accent {
+  color: transparent;
+  -webkit-text-stroke: 2px #e8192c;
+  text-stroke: 2px #e8192c;
+  filter: drop-shadow(0 0 16px rgba(232,25,44,0.3));
+}
+
+.cats-sub {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.04em;
+}
+
+/* ── Grid ────────────────────────────────────────────────────────── */
+.cat-grid {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  padding: 0 2rem;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* ── Card ────────────────────────────────────────────────────────── */
+.cat-card {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+
+  opacity: 0;
+  transform: translateY(22px) scale(0.97);
+  animation: cardReveal 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.is-ready .cat-card {
+  /* animation handles reveal */
+}
+
+@keyframes cardReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
-  
-  .category-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 1rem;
+}
+
+/* BG image */
+.cat-bg {
+  position: absolute;
+  inset: -6px;  /* slight overscan so zoom doesn't show edges */
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.cat-card:hover .cat-bg {
+  transform: scale(1.1);
+}
+
+/* Dark veil */
+.cat-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(5, 2, 4, 0.92) 0%,
+    rgba(5, 2, 4, 0.45) 50%,
+    rgba(5, 2, 4, 0.2) 100%
+  );
+  transition: opacity 0.35s ease;
+}
+
+.cat-card:hover .cat-veil {
+  opacity: 0.7;
+}
+
+/* Color wash on hover */
+.cat-color-wash {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  mix-blend-mode: multiply;
+}
+
+.cat-card:hover .cat-color-wash {
+  opacity: 0.55;
+}
+
+/* Glowing border */
+.cat-border-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+  pointer-events: none;
+}
+
+.cat-card:hover .cat-border-glow {
+  border-color: rgba(232, 25, 44, 0.5);
+  box-shadow: inset 0 0 24px rgba(232,25,44,0.12), 0 0 24px rgba(232,25,44,0.18);
+}
+
+/* Icon */
+.cat-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%) scale(1);
+  font-size: 2.4rem;
+  line-height: 1;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
+}
+
+.cat-card:hover .cat-icon {
+  transform: translate(-50%, -70%) scale(1.15);
+}
+
+/* Footer */
+.cat-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.9rem 1rem 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%);
+}
+
+.cat-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.07em;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.7);
+  line-height: 1;
+}
+
+.cat-arrow {
+  color: rgba(255,255,255,0.0);
+  font-size: 1.1rem;
+  transform: translateX(-6px);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.cat-arrow.active {
+  color: #e8192c;
+  transform: translateX(0);
+}
+
+/* Shine sweep */
+.cat-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(255,255,255,0.06) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0s;
+  pointer-events: none;
+}
+
+.cat-card:hover .cat-shine {
+  transform: translateX(100%);
+  transition: transform 0.6s ease;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .cat-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 1rem;
+    gap: 10px;
   }
-  
-  .category-card {
-    padding: 1rem;
-    background-color: #B20710;
-    color: white;
-    text-align: center;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.2s;
-    height: 150px;
-    align-content: center;
-    justify-content: center;
-  }
-  
-  .category-card:hover {
-    transform: scale(1.1);
-  }
-  
+  .cats-title { font-size: 2.8rem; }
+  .back-btn { margin-left: 1rem; }
+}
